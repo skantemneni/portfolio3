@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 /*import 'rxjs/add/operator/do';*/
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { HttpEvent, HttpInterceptor, HttpResponse, HttpHandler, HttpRequest } from '@angular/common/http';
 import { AccountService } from './account.service';
 import { Stock } from './stocks.model';
@@ -22,6 +22,7 @@ export class InterceptorService {
   providedIn: 'root'
 })
 export class StocksInterceptor implements HttpInterceptor {
+  handleError: any;
   constructor(private accountService: AccountService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -42,7 +43,10 @@ export class StocksInterceptor implements HttpInterceptor {
         this.accountService.calculateValue();
 
         return stocks;
+      } else {
+        console.log("Some effed up!");
+        return Array<Stock>();
       }
-    }));
+    }), catchError(this.handleError.bind(this)),);
   }
 }

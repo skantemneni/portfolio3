@@ -1,6 +1,6 @@
 export class ConfigService {
-  private _api: string | undefined;
-  
+  private _api: string = "https://angular2-in-action-api.herokuapp.com/stocks/snapshot?symbols=AFG,AAPL,AMZN";
+
   static map = new Map(); 
   constructor() { }
 

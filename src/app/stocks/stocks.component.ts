@@ -9,11 +9,13 @@ import { Stock } from '../services/stocks.model';
 })
 export class StocksComponent {
   @Input() stocks: any;
+  total: number = 0;
 
   constructor(private accountService: AccountService) { }
 
   buy(stock: Stock): void {
     this.accountService.purchase(stock);
+    ++this.total;
   }
 
 }

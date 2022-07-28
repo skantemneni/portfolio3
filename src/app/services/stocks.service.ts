@@ -14,4 +14,7 @@ export class StocksService {
   getStocks() {
     return this.http.get<Array<Stock>>(ConfigService.get('api'));
   }
+
+
+  
 }

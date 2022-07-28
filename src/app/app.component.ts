@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   stocks: Array<Stock> = [];
   interval: any;
 
-  constructor(private accountService: AccountService, private stocksService: StocksService, private alertService: AlertService) { }
+  constructor(public accountService: AccountService, private stocksService: StocksService, private alertService: AlertService) { }
   
   ngOnInit(): void {
     this.load();
